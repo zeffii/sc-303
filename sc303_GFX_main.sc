@@ -128,6 +128,25 @@ w.drawFunc_{|me|
 		}
 	};
 
+	// Uppermost triangles..
+	Pen.use {
+		var x_tri = 0;
+		var y_tri = 0;
+		var y_start = 36;
+		var trisize = 5;
+		var positions = [60, 133, 222, 806, 854, 911, 974, 1038];
+
+		positions.do { |item, idx|
+
+			Pen.fillColor = Color(0.3, 0.3, 0.3, 0.5);
+		    Pen.moveTo(item@y_start);
+			Pen.lineTo((item + trisize)@(y_start + trisize + 3));
+            Pen.lineTo((item - trisize)@(y_start + trisize + 3));
+			Pen.fill;
+		}
+	};
+
+
 	// LEDS ///////
 	// - notes, in order
 	Color.red.setFill;
@@ -174,7 +193,20 @@ w.drawFunc_{|me|
 	Pen.addOval(Rect(932, 392, 12, 12));
 	Pen.fill;
 
-	// red lines
+	// wide ticks at top of unit, top row of knobs
+	Color.gray.setFill;
+	6.do {|item, idx|
+		Pen.addRect(Rect((329 + (idx * 81.6)), 48, 4, 7));
+	};
+	Pen.fill;
+
+
+	// solid dot above transpose
+	Color.gray.setFill;
+    Pen.addOval(Rect(745, 337, 9, 9));
+	Pen.fill;
+
+	// red lines, these are the main drawing commands...deceptively short code.
 	Pen.use {
 		Color(0.1, 0.1, 0.1, 1).set;
 		Pen.width = 0.3;
@@ -544,6 +576,27 @@ t.stringColor_(Color.gray);
 	t.background = Color.grey;
 	t.stringColor_(Color.white);
 };
+
+~ext_selectors = [
+	//[x, y, w, text]
+	[748, ~sely, 18, "9"],
+	[809, ~sely, 18, "0"],
+	[867, ~sely, 22, "100"],
+	[926, ~sely, 22, "200"]
+];
+
+~ext_selectors.do{|item, index|
+	t = StaticText.new(
+		w, Rect(item[0], item[1], item[2], 13))
+	    .string_(item[3]).align_(\center);
+	t.font = Font("Monaco", 10);
+	t.background = Color.grey;
+	t.stringColor_(Color.white);
+};
+
+
+// further white on dark background 9 10 100 200
+
 
 // del ins (top and bottom)
 ~whitemarks = [
