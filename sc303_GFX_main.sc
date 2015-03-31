@@ -4,6 +4,7 @@ var size = 50;
 var start_x = 305;
 var x_offset = 20;
 var whitenotes_y = 450;
+var redCol = Color(1.0, 0.6, 0.5, 1.0);
 
 var basspath = thisProcess.nowExecutingPath.dirname;
 var coordinates = CSVFileReader.readInterpret(basspath ++ "/coordinates.pen");
@@ -37,7 +38,7 @@ w.drawFunc_{|me|
 			[726,317],[726,384],[968,384],[968,360],
 			[736,360],[736,303],
 		];
-		Pen.fillColor = Color(0.3, 0.3, 0.3, 0.2);
+		Pen.fillColor = Color(0.3, 0.3, 0.3, 0.9);
 		Pen.moveTo(tcoords[0][0]@tcoords[0][1]);
 		tcoords.do { |item, idx|
 			if (idx > 0) {
@@ -49,7 +50,7 @@ w.drawFunc_{|me|
 
 	// under coat bottom left
 	Pen.use {
-		Pen.fillColor = Color(0.3, 0.3, 0.3, 0.2);
+		Pen.fillColor = Color(0.3, 0.3, 0.3, 0.9);
 		Pen.moveTo(coordinates2[0][0]@coordinates2[0][1]);
 		coordinates2.do { |item, idx|
 			if (idx > 0) {
@@ -65,7 +66,7 @@ w.drawFunc_{|me|
 		var tcoords = [
 			[847, 466],[967, 466],[967,487],[849,487],[848,485]
 		];
-		Pen.fillColor = Color(0.3, 0.3, 0.3, 0.2);
+		Pen.fillColor = Color(0.3, 0.3, 0.3, 0.9);
 		Pen.moveTo(tcoords[0][0]@tcoords[0][1]);
 		tcoords.do { |item, idx|
 			if (idx > 0) {
@@ -89,7 +90,7 @@ w.drawFunc_{|me|
 
 			x_i = x_init + (item * x_offset);
 
-			Pen.fillColor = Color(0.3, 0.3, 0.3, 0.5);
+			Pen.fillColor = Color(0.3, 0.3, 0.3, 0.9);
 		    Pen.moveTo(x_i@y_init);
 			Pen.lineTo((x_i + kwidth)@y_init);
 			Pen.lineTo((x_i + kwidth)@(y_init + kheight));
@@ -191,12 +192,12 @@ w.drawFunc_{|me|
 
 	// some highlight
 	Color(0.49, 0.49, 0.49, 0.46).setFill;
-    Pen.addRect(Rect(1093, 286.8, 6, 237));
+    Pen.addRect(Rect(1093, 286.8, 6, 242));
 	Pen.fill;
 
 	// some highlight
 	Color(0.29, 0.29, 0.29, 0.46).setFill;
-    Pen.addRect(Rect(11, 286.8, 6, 237));
+    Pen.addRect(Rect(11, 286.8, 6, 241));
 	Pen.fill;
 
 	// top some deeplight
@@ -208,6 +209,24 @@ w.drawFunc_{|me|
 	Color(0.99, 0.99, 0.99, 0.76).setFill;
     Pen.addRect(Rect(13, 126, 1084, 2));
 	Pen.fill;
+
+	// white control lines
+	Pen.use {
+		var tcoords = [
+			[849, 476, 967, 476], [908, 466, 908, 475],
+			[735, 372, 840, 372], [787 ,373, 787, 383],
+			// vertical splits
+			[847,361,847,383], [908,361,908,383],
+		];
+		Pen.width = 1.3;
+		Pen.strokeColor = Color.white;
+		Pen.beginPath;
+		tcoords.do { |item, idx|
+			Pen.line(item[0]@item[1], item[2]@item[3]);
+			Pen.stroke;
+		};
+	};
+
 
 
 };
@@ -465,6 +484,33 @@ t = StaticText.new(w, Rect(113, 303, 158, 20)).string_("PITCH MODE").align_(\cen
 t.font = Font("Monaco", 12);
 t.stringColor_(Color.white);
 
+// Pitches, white text small
+~pitches_xy = [
+	[270, 301, "C"],
+	[297, 301, "C"],
+	  [306, 299, "#"],
+	[331, 301, "D"],
+	[357, 301, "D"],
+	  [366, 299, "#"],
+	[389, 301, "E"],
+	[448, 301, "F"],
+    [476, 301, "F"],
+	  [485, 299, "#"],
+    [509, 301, "G"],
+    [537, 301, "G"],
+	  [546, 299, "#"],
+    [569, 301, "A"],
+    [596, 301, "A"],
+	  [605, 299, "#"],
+    [628, 301, "B"],
+    [687, 301, "C"]
+];
+~pitches_xy.do{ |item, idx|
+	t = StaticText.new(w, Rect(item[0], item[1], 12, 20)).string_(item[2]).align_(\center);
+	t.font = Font("Monaco", 11);
+	t.stringColor_(Color.white);
+};
+
 // FUNCTION
 t = StaticText.new(w, Rect(100, 388, 158, 20)).string_("FUNCTION").align_(\center);
 t.font = Font("Monaco", 12);
@@ -496,6 +542,20 @@ t.stringColor_(Color.gray);
 	    .string_(item).align_(\center);
 	t.font = Font("Monaco", 10);
 	t.background = Color.grey;
+	t.stringColor_(Color.white);
+};
+
+// del ins (top and bottom)
+~whitemarks = [
+	[298, 391, "DEL"],
+	[297, 492, "DEL"],
+	[356, 391, "INS"],
+	[356, 492, "INS"]
+];
+~whitemarks.do{|item, idx|
+	t = StaticText.new(w, Rect(item[0], item[1], 19, 13))
+	.string_(item[2]).align_(\center);
+	t.font = Font("Monaco", 9);
 	t.stringColor_(Color.white);
 };
 
@@ -552,7 +612,7 @@ t.stringColor_(Color.gray);
 t = StaticText.new(
 	w, Rect(207, 463, 48, 27)).string_("PATTERN").align_(\center);
 t.font = Font("Monaco", 11);
-t.stringColor_(Color.red);
+t.stringColor_(redCol);
 
 // red pattern indicators
 ~red_x_start = 273;
@@ -564,9 +624,49 @@ t.stringColor_(Color.red);
 			10,
 			27)).string_(idx+1).align_(\center);
 	t.font = Font("Monaco", 11);
-	t.stringColor_(Color.red);
+	t.stringColor_(redCol);
 
 };
+
+// PATT. SECTION red
+t = StaticText.new(
+	w, Rect(867, 469, 82, 27)).string_("PATT. SECTION").align_(\center);
+t.font = Font("Monaco", 11);
+t.stringColor_(redCol);
+
+[872, 932].do{|xpos, idx|
+	t = StaticText.new(
+		w, Rect(xpos, 458, 12, 27)).string_(["A","B"][idx]).align_(\center);
+	t.font = Font("Monaco", 9);
+	t.stringColor_(redCol);
+};
+
+// TRANSPOSE DOWN UP ACCENT SLIDE (WHITE ON BLACK)
+~whitetext = [
+	//[x, y, w, text],
+	[752, 353, 70, "TRANSPOSE"],
+	[741, 365, 34, "DOWN"],
+	[806, 365, 24, "UP"],
+    [855, 359, 44, "ACCENT"],
+    [919, 359, 30, "SLIDE"],
+];
+~whitetext.do{ |item, idx|
+	t = StaticText.new(
+		w, Rect(item[0], item[1], item[2], 27))
+	    .string_(item[3])
+	    .align_(\center);
+	t.font = Font("Monaco", 10);
+	t.stringColor_(Color.white);
+};
+
+// black, smallest tripplet text
+t = StaticText.new(
+	w, Rect(814, 474, 8, 27))
+    .string_("3")
+    .align_(\center);
+t.font = Font("Monaco", 8);
+t.stringColor_(Color.gray);
+
 
 w.refresh;
 
