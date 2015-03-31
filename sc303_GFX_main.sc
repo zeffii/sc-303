@@ -4,9 +4,10 @@ var size = 50;
 var start_x = 305;
 var x_offset = 20;
 var whitenotes_y = 450;
-var coordinates = CSVFileReader.readInterpret("/home/zeffii/SUPERCOLLIDER/coordinates.pen");
 
-var coordinates2 = CSVFileReader.readInterpret("/home/zeffii/SUPERCOLLIDER/coordinates2.pen");
+var basspath = thisProcess.nowExecutingPath.dirname;
+var coordinates = CSVFileReader.readInterpret(basspath ++ "/coordinates.pen");
+var coordinates2 = CSVFileReader.readInterpret(basspath ++ "/coordinates2.pen");
 
 
 Window.closeAll;
