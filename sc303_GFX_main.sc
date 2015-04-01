@@ -10,6 +10,17 @@ var basspath = thisProcess.nowExecutingPath.dirname;
 var coordinates = CSVFileReader.readInterpret(basspath ++ "/coordinates.pen");
 var coordinates2 = CSVFileReader.readInterpret(basspath ++ "/coordinates2.pen");
 
+var glyph1 = [
+[12,551],[11,551],[12,551],[12,550],[12,549],[11,548],[10,548],[9,547],[8,547],[8,552],[8,553],[7,554],[5,555],[3,556],[2,555],[2,554],[3,553],[4,551],[6,551],[7,551],[7,541],[8,540],[9,541],[9,542],[11,543],[12,544],[13,545],[13,546],[12,547],[12,546],[12,545],[11,544],[10,544],[9,543],[8,544],[8,545],[9,546],[10,547],[11,547],[12,548],[13,548],[13,550],[13,551],[12,551]];
+
+var glyph2 = [
+[12,552],[11,553],[10,554],[7,555],[4,555],[3,555],[3,554],[5,554],[9,553],[11,552],[12,552]];
+
+var glyph3 = [
+[7,555],[8,552],[9,549],[8,549],[7,549],[6,550],[5,550],[4,549],[3,549],[3,548],[4,547],[5,546],[6,546],[6,547],[6,548],[7,548],[8,548],[9,547],[9,546],[10,544],[10,543],[9,544],[7,545],[6,545],[4,545],[4,544],[4,543],[5,542],[6,542],[7,542],[7,543],[8,543],[9,543],[10,542],[11,541],[11,540],[12,540],[12,541],[11,542],[10,548],[8,554],[8,555]];
+
+var glyph4 = [
+[9,550],[10,549],[10,548],[9,548],[9,547],[8,547],[7,547],[7,548],[7,551],[7,553],[6,555],[5,556],[3,556],[2,555],[3,554],[4,553],[5,552],[6,552],[6,543],[7,544],[8,545],[9,546],[10,547],[11,548],[11,550],[10,550]];
 
 Window.closeAll;
 
@@ -37,10 +48,7 @@ w.drawFunc_{|me|
 	~grad_c1 = Color(0.2, 0.2, 0.2, 0.2).setFill;
 	~grad_c2 = Color(0.8, 0.8, 0.8, 0.6).setFill;
     Pen.addRect(~dkt);
-	//Pen.fillAxialGradient(~dkt.bounds.leftTop, ~dkt.bounds.rightBottom, ~grad_c1, ~grad_c2);
 	Pen.fillAxialGradient(~dkt.bounds.leftTop, ~dkt.bounds.leftBottom, ~grad_c1, ~grad_c2);
-
-
 
 	// NOTES SECTION BACKDROP
 	Color(1.0, 1.0, 1.0, 0.5).setFill;
@@ -239,6 +247,34 @@ w.drawFunc_{|me|
 			Pen.stroke
 		}
 	};
+
+
+	// GLYPH DRAW FUNCTION.
+	~glyphdraw = {
+		| offsetx, offsety, glyph, color|
+		Pen.use {
+
+			Pen.fillColor = color;
+			Pen.moveTo((glyph[0][0] + offsetx)@(glyph[0][1] + offsety));
+
+			glyph.do{ |item, idx|
+				if (idx > 0) {
+					Pen.lineTo((item[0] + offsetx)@(item[1] + offsety));
+				}
+			};
+			Pen.fill;
+
+		};
+	};
+
+	~glyphcolor = Color(0.2, 0.2, 0.2, 0.5);
+	~glyphdraw.value(759, -206, glyph1, ~glyphcolor);
+	~glyphdraw.value(813, -206, glyph1, ~glyphcolor);
+	~glyphdraw.value(806, -198, glyph2, ~glyphcolor);
+    ~glyphdraw.value(878, -203, glyph3, ~glyphcolor);
+	~glyphdraw.value(803, -75, glyph4, ~glyphcolor);
+	~glyphdraw.value(811, -75, glyph4, ~glyphcolor);
+	~glyphdraw.value(819, -75, glyph4, ~glyphcolor);
 
 	// some highlight
 	Color(0.99, 0.99, 0.99, 0.86).setFill;
