@@ -21,6 +21,27 @@ w = Window.new("tb303", Rect.new(10, 530, 1120, 570))
 // 1200 * 600
 
 w.drawFunc_{|me|
+	// full synth background
+	Color(1.0, 1.0, 1.0, 0.4).setFill;
+    Pen.addRect(Rect(5, 21, 1100, 521));
+	Pen.fill;
+
+	// front (bottom) shade
+	Color(0.8, 0.8, 0.8, 0.1).setFill;
+    Pen.addRect(Rect(4, 543, 1101, 8));
+	Pen.fill;
+
+	// front (bottom) gradient
+	Color(0.8, 0.8, 0.2, 0.2).setFill;
+	~dkt = Rect(4, 531, 1101, 10);
+	~grad_c1 = Color(0.2, 0.2, 0.2, 0.2).setFill;
+	~grad_c2 = Color(0.8, 0.8, 0.8, 0.6).setFill;
+    Pen.addRect(~dkt);
+	//Pen.fillAxialGradient(~dkt.bounds.leftTop, ~dkt.bounds.rightBottom, ~grad_c1, ~grad_c2);
+	Pen.fillAxialGradient(~dkt.bounds.leftTop, ~dkt.bounds.leftBottom, ~grad_c1, ~grad_c2);
+
+
+
 	// NOTES SECTION BACKDROP
 	Color(1.0, 1.0, 1.0, 0.5).setFill;
     Pen.addRect(Rect(28, 300, 1054, 218));
@@ -211,7 +232,9 @@ w.drawFunc_{|me|
 		Color(0.1, 0.1, 0.1, 1).set;
 		Pen.width = 0.3;
 		Pen.beginPath;
+
 		coordinates.do{ |item, idx|
+
 			Pen.line(item[0]@item[1], item[2]@item[3]);
 			Pen.stroke
 		}
@@ -239,8 +262,18 @@ w.drawFunc_{|me|
 
 	// top some highlight
 	Color(0.99, 0.99, 0.99, 0.76).setFill;
-    Pen.addRect(Rect(13, 126, 1084, 2));
+	Pen.addRect(Rect(13, 126, 1084, 2));  // -4  (mid, under brand)
+	Pen.addRect(Rect(13, 30, 1084, 2));  // -3  (above waveform)
 	Pen.fill;
+
+	Color(0.99, 0.99, 0.99, 0.36).setFill;
+	Pen.addRect(Rect(10, 27, 1089, 2));  // -2  (above waveform fold)
+	Pen.fill;
+
+	Color(0.99, 0.99, 0.99, 0.76).setFill;
+    Pen.addRect(Rect(4, 20, 1102, 2));  // -2  (above waveform fold)
+	Pen.fill;
+
 
 	// white control lines
 	Pen.use {
@@ -250,10 +283,13 @@ w.drawFunc_{|me|
 			// vertical splits
 			[847,361,847,383], [908,361,908,383],
 		];
+
 		Pen.width = 1.3;
 		Pen.strokeColor = Color.white;
 		Pen.beginPath;
+
 		tcoords.do { |item, idx|
+
 			Pen.line(item[0]@item[1], item[2]@item[3]);
 			Pen.stroke;
 		};
@@ -273,10 +309,14 @@ k = Knob.new(w, Rect(start_x + (x_offset*4), 58, size, size));
 k = Knob.new(w, Rect(start_x + (x_offset*5), 58, size, size));
 
 // mid row
-k = Knob.new(w, Rect(126, 177, 80, 80));  // l 1
+~knob_TEMPO = Knob.new(w, Rect(126, 177, 80, 80));  // l 1
 k = Knob.new(w, Rect(290, 177, 80, 80));  // l 2
 k = Knob.new(w, Rect(453, 177, 80, 80));  // l 3
 k = Knob.new(w, Rect(923, 177, 80, 80));  // l 3
+
+~knob_TEMPO.action_({ |obj|
+	obj.value.postln;
+});
 
 // notes, black
 b = Button(w, Rect(294, 341, 25, 46));
