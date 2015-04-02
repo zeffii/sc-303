@@ -47,12 +47,12 @@ w = Window.new("tb303", Rect.new(10, 530, 1120, 570))
 w.drawFunc_{|me|
 	// full synth background
 	Color(1.0, 1.0, 1.0, 0.4).setFill;
-    Pen.addRect(Rect(5, 21, 1100, 521));
+	Pen.addRect(Rect(5, 21, 1100, 521));
 	Pen.fill;
 
 	// front (bottom) shade
 	Color(0.8, 0.8, 0.8, 0.1).setFill;
-    Pen.addRect(Rect(4, 543, 1101, 8));
+	Pen.addRect(Rect(4, 543, 1101, 8));
 	Pen.fill;
 
 	// front (bottom) gradient
@@ -60,17 +60,17 @@ w.drawFunc_{|me|
 	~dkt = Rect(4, 531, 1101, 10);
 	~grad_c1 = Color(0.2, 0.2, 0.2, 0.2).setFill;
 	~grad_c2 = Color(0.8, 0.8, 0.8, 0.6).setFill;
-    Pen.addRect(~dkt);
+	Pen.addRect(~dkt);
 	Pen.fillAxialGradient(~dkt.bounds.leftTop, ~dkt.bounds.leftBottom, ~grad_c1, ~grad_c2);
 
 	// NOTES SECTION BACKDROP
 	Color(1.0, 1.0, 1.0, 0.5).setFill;
-    Pen.addRect(Rect(28, 300, 1054, 218));
+	Pen.addRect(Rect(28, 300, 1054, 218));
 	Pen.fill;
 
 	// some shadows
 	Color(0.4, 0.4, 0.4, 0.2).setFill;
-    Pen.addRect(Rect(13, 282, 1086, 5));
+	Pen.addRect(Rect(13, 282, 1086, 5));
 	Pen.fill;
 
 	// under coat top
@@ -120,7 +120,7 @@ w.drawFunc_{|me|
 
 	// black keys polygons
 	Pen.use {
-	    var r = 2;
+		var r = 2;
 		var x_i = 0;
 		var x_init = 292;
 		var y_init = 321;
@@ -133,10 +133,10 @@ w.drawFunc_{|me|
 			x_i = x_init + (item * x_offset);
 
 			Pen.fillColor = Color(0.3, 0.3, 0.3, 0.9);
-		    Pen.moveTo(x_i@y_init);
+			Pen.moveTo(x_i@y_init);
 			Pen.lineTo((x_i + kwidth)@y_init);
 			Pen.lineTo((x_i + kwidth)@(y_init + kheight));
-		    Pen.lineTo((x_i + kwidth -r)@(y_init + kheight + r));  //    /
+			Pen.lineTo((x_i + kwidth -r)@(y_init + kheight + r));  //    /
 			Pen.lineTo((x_i + r)@(y_init + kheight + r));          // \
 			Pen.lineTo(x_i@(y_init + kheight));
 
@@ -146,7 +146,7 @@ w.drawFunc_{|me|
 
 	// DEL SET
 	Pen.use {
-	    var r = 2;
+		var r = 2;
 		var x_i = 0;
 		var x_init = 293;
 		var y_init = 491;
@@ -159,10 +159,10 @@ w.drawFunc_{|me|
 			x_i = x_init + (item * x_offset);
 
 			Pen.fillColor = Color(0.3, 0.3, 0.3, 0.5);
-		    Pen.moveTo(x_i@y_init);
+			Pen.moveTo(x_i@y_init);
 			Pen.lineTo((x_i + kwidth)@y_init);
 			Pen.lineTo((x_i + kwidth)@(y_init + kheight));
-		    Pen.lineTo((x_i + kwidth -r)@(y_init + kheight + r));  //    /
+			Pen.lineTo((x_i + kwidth -r)@(y_init + kheight + r));  //    /
 			Pen.lineTo((x_i + r)@(y_init + kheight + r));          // \
 			Pen.lineTo(x_i@(y_init + kheight));
 
@@ -181,9 +181,9 @@ w.drawFunc_{|me|
 		positions.do { |item, idx|
 
 			Pen.fillColor = Color(0.3, 0.3, 0.3, 0.5);
-		    Pen.moveTo(item@y_start);
+			Pen.moveTo(item@y_start);
 			Pen.lineTo((item + trisize)@(y_start + trisize + 3));
-            Pen.lineTo((item - trisize)@(y_start + trisize + 3));
+			Pen.lineTo((item - trisize)@(y_start + trisize + 3));
 			Pen.fill;
 		}
 	};
@@ -191,7 +191,7 @@ w.drawFunc_{|me|
 	// MAIN PANEL CUTOUT for rotary knobs
 	Color(0.3, 0.3, 0.3, 0.1).setFill;
 	Color(0.3, 0.3, 0.3, 0.2).setStroke;
-    Pen.addOval(Rect(124, 174, 86, 86));  // TEMPO
+	Pen.addOval(Rect(124, 174, 86, 86));  // TEMPO
 	Pen.addOval(Rect(287, 174, 86, 86));  // TRACK PATT
 	Pen.addOval(Rect(450, 174, 86, 86));  // MODE
 	Pen.addOval(Rect(920, 174, 86, 86));  // VOLUME
@@ -221,44 +221,44 @@ w.drawFunc_{|me|
 	// LEDS ///////
 	// - notes, in order
 	Color.red.setFill;
-    Pen.addOval(Rect(272, 392, 12, 12));  //  C
-    Pen.addOval(Rect(301, 322, 12, 12));  //  C#
-    Pen.addOval(Rect(332, 392, 12, 12));  //  D
-    Pen.addOval(Rect(360, 322, 12, 12));  //  D#
-    Pen.addOval(Rect(391, 392, 12, 12));  //  E
+	Pen.addOval(Rect(272, 392, 12, 12));  //  C
+	Pen.addOval(Rect(301, 322, 12, 12));  //  C#
+	Pen.addOval(Rect(332, 392, 12, 12));  //  D
+	Pen.addOval(Rect(360, 322, 12, 12));  //  D#
+	Pen.addOval(Rect(391, 392, 12, 12));  //  E
 	Pen.addOval(Rect(451, 392, 12, 12));  //  F
 	Pen.addOval(Rect(480, 322, 12, 12));  //  F#
 	Pen.addOval(Rect(510, 392, 12, 12));  //  G
 	Pen.addOval(Rect(539, 322, 12, 12));  //  G#
 	Pen.addOval(Rect(570, 392, 12, 12));  //  A
 	Pen.addOval(Rect(598, 322, 12, 12));  //  A#
-    Pen.addOval(Rect(629, 392, 12, 12));  //  B
-    Pen.addOval(Rect(689, 392, 12, 12));  //  C'
-    Pen.fill;
+	Pen.addOval(Rect(629, 392, 12, 12));  //  B
+	Pen.addOval(Rect(689, 392, 12, 12));  //  C'
+	Pen.fill;
 
 	// PITCH MODE LED
 	Color.red.setFill;
-    Pen.addOval(Rect(185, 329, 12, 12));
+	Pen.addOval(Rect(185, 329, 12, 12));
 	Pen.fill;
 
 	// FUNCTION MODE LED
 	Color.red.setFill;
-    Pen.addOval(Rect(221, 392, 12, 12));
+	Pen.addOval(Rect(221, 392, 12, 12));
 	Pen.fill;
 
 	// BATTERY LED
 	Color.red.setFill;
-    Pen.addOval(Rect(79, 392, 12, 12));
+	Pen.addOval(Rect(79, 392, 12, 12));
 	Pen.fill;
 
 	// TIME MODE LED
 	Color.red.setFill;
-    Pen.addOval(Rect(841, 321, 12, 12));
+	Pen.addOval(Rect(841, 321, 12, 12));
 	Pen.fill;
 
 	// UP DOWN ACCENT SLIDE
 	Color.red.setFill;
-    Pen.addOval(Rect(752, 392, 12, 12));
+	Pen.addOval(Rect(752, 392, 12, 12));
 	Pen.addOval(Rect(812, 392, 12, 12));
 	Pen.addOval(Rect(871, 392, 12, 12));
 	Pen.addOval(Rect(932, 392, 12, 12));
@@ -274,7 +274,7 @@ w.drawFunc_{|me|
 
 	// solid dot above transpose
 	Color.gray.setFill;
-    Pen.addOval(Rect(745, 337, 9, 9));
+	Pen.addOval(Rect(745, 337, 9, 9));
 	Pen.fill;
 
 	// red lines, these are the main drawing commands...deceptively short code.
@@ -313,29 +313,29 @@ w.drawFunc_{|me|
 	~glyphdraw.value(759, -206, glyph1, ~glyphcolor);
 	~glyphdraw.value(813, -206, glyph1, ~glyphcolor);
 	~glyphdraw.value(806, -198, glyph2, ~glyphcolor);
-    ~glyphdraw.value(878, -203, glyph3, ~glyphcolor);
+	~glyphdraw.value(878, -203, glyph3, ~glyphcolor);
 	~glyphdraw.value(803, -75, glyph4, ~glyphcolor);
 	~glyphdraw.value(811, -75, glyph4, ~glyphcolor);
 	~glyphdraw.value(819, -75, glyph4, ~glyphcolor);
 
 	// some highlight
 	Color(0.99, 0.99, 0.99, 0.86).setFill;
-    Pen.addRect(Rect(13, 286.8, 1086, 2));
+	Pen.addRect(Rect(13, 286.8, 1086, 2));
 	Pen.fill;
 
 	// some highlight
 	Color(0.49, 0.49, 0.49, 0.46).setFill;
-    Pen.addRect(Rect(1093, 286.8, 6, 242));
+	Pen.addRect(Rect(1093, 286.8, 6, 242));
 	Pen.fill;
 
 	// some highlight
 	Color(0.29, 0.29, 0.29, 0.46).setFill;
-    Pen.addRect(Rect(11, 286.8, 6, 241));
+	Pen.addRect(Rect(11, 286.8, 6, 241));
 	Pen.fill;
 
 	// top some deeplight
 	Color(0.59, 0.59, 0.59, 0.13).setFill;
-    Pen.addRect(Rect(13, 122, 1086, 4));
+	Pen.addRect(Rect(13, 122, 1086, 4));
 	Pen.fill;
 
 	// top some highlight
@@ -349,7 +349,7 @@ w.drawFunc_{|me|
 	Pen.fill;
 
 	Color(0.99, 0.99, 0.99, 0.76).setFill;
-    Pen.addRect(Rect(4, 20, 1102, 2));  // -2  (above waveform fold)
+	Pen.addRect(Rect(4, 20, 1102, 2));  // -2  (above waveform fold)
 	Pen.fill;
 
 
@@ -387,7 +387,7 @@ x_offset = 81.76;
 	var sstart_x = 296.8;
 
 	k = Knob.new(w, Rect(sstart_x + (x_offset*idx), 49, ssize, ssize));
-    k.color = ~knob_colors_style;
+	k.color = ~knob_colors_style;
 };
 
 // mid row
@@ -600,13 +600,13 @@ t.stringColor_(Color.gray);
 
 t = StaticText.new(
 	w, Rect(53, 388, 28, 20))
-    .string_("RUN").align_(\center);
+	.string_("RUN").align_(\center);
 t.font = Font("Monaco", 9);
 t.stringColor_(Color.gray);
 
 t = StaticText.new(
 	w, Rect(94, 388, 38, 20))
-    .string_("BATTERY").align_(\center);
+	.string_("BATTERY").align_(\center);
 t.font = Font("Monaco", 9);
 t.stringColor_(Color.gray);
 
@@ -656,16 +656,16 @@ t.stringColor_(Color.white);
 	  [366, 299, "#"],
 	[389, 301, "E"],
 	[448, 301, "F"],
-    [476, 301, "F"],
+	[476, 301, "F"],
 	  [485, 299, "#"],
-    [509, 301, "G"],
-    [537, 301, "G"],
+	[509, 301, "G"],
+	[537, 301, "G"],
 	  [546, 299, "#"],
-    [569, 301, "A"],
-    [596, 301, "A"],
+	[569, 301, "A"],
+	[596, 301, "A"],
 	  [605, 299, "#"],
-    [628, 301, "B"],
-    [687, 301, "C"]
+	[628, 301, "B"],
+	[687, 301, "C"]
 ];
 ~pitches_xy.do{ |item, idx|
 	t = StaticText.new(w, Rect(item[0], item[1], 12, 20)).string_(item[2]).align_(\center);
@@ -701,7 +701,7 @@ t.stringColor_(Color.gray);
 ~selector_cyphers.do{|item, index|
 	t = StaticText.new(
 		w, Rect(~selx + (~selx_offset*index), ~sely, 18, 13))
-	    .string_(item).align_(\center);
+		.string_(item).align_(\center);
 	t.font = Font("Monaco", 10);
 	t.background = Color.grey;
 	t.stringColor_(Color.white);
@@ -718,7 +718,7 @@ t.stringColor_(Color.gray);
 ~ext_selectors.do{|item, index|
 	t = StaticText.new(
 		w, Rect(item[0], item[1], item[2], 13))
-	    .string_(item[3]).align_(\center);
+		.string_(item[3]).align_(\center);
 	t.font = Font("Monaco", 10);
 	t.background = Color.grey;
 	t.stringColor_(Color.white);
@@ -773,21 +773,21 @@ t.stringColor_(Color.gray);
 // WRITE / NEXT
 t = StaticText.new(
 	w, Rect(980, 467, 88, 20))
-    .string_("WRITE / NEXT").align_(\center);
+	.string_("WRITE / NEXT").align_(\center);
 t.font = Font("Monaco", 10);
 t.stringColor_(Color.gray);
 
 // TAP
 t = StaticText.new(
 	w, Rect(1010, 493, 30, 20))
-    .string_("TAP").align_(\center);
+	.string_("TAP").align_(\center);
 t.font = Font("Monaco", 10);
 t.stringColor_(Color.gray);
 
 // BACK
 t = StaticText.new(
 	w, Rect(1009, 328, 28, 20))
-    .string_("BACK").align_(\center);
+	.string_("BACK").align_(\center);
 t.font = Font("Monaco", 10);
 t.stringColor_(Color.gray);
 
@@ -830,14 +830,14 @@ t.stringColor_(redCol);
 	[752, 353, 70, "TRANSPOSE"],
 	[741, 365, 34, "DOWN"],
 	[806, 365, 24, "UP"],
-    [855, 359, 44, "ACCENT"],
-    [919, 359, 30, "SLIDE"],
+	[855, 359, 44, "ACCENT"],
+	[919, 359, 30, "SLIDE"],
 ];
 ~whitetext.do{ |item, idx|
 	t = StaticText.new(
 		w, Rect(item[0], item[1], item[2], 27))
-	    .string_(item[3])
-	    .align_(\center);
+		.string_(item[3])
+		.align_(\center);
 	t.font = Font("Monaco", 10);
 	t.stringColor_(Color.white);
 };
@@ -845,8 +845,8 @@ t.stringColor_(redCol);
 // black, smallest tripplet text
 t = StaticText.new(
 	w, Rect(814, 474, 8, 27))
-    .string_("3")
-    .align_(\center);
+	.string_("3")
+	.align_(\center);
 t.font = Font("Monaco", 8);
 t.stringColor_(Color.gray);
 
