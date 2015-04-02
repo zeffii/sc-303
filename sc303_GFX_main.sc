@@ -1,4 +1,14 @@
+/*
+
+b.mouseDownAction = { t.string = "Button pressed" };
+b.mouseUpAction = { t.string = "Button released" };
+
+
+*/
+
+
 (
+
 
 var size = 50;
 var start_x = 305;
@@ -21,6 +31,9 @@ var glyph3 = [
 
 var glyph4 = [
 [9,550],[10,549],[10,548],[9,548],[9,547],[8,547],[7,547],[7,548],[7,551],[7,553],[6,555],[5,556],[3,556],[2,555],[3,554],[4,553],[5,552],[6,552],[6,543],[7,544],[8,545],[9,546],[10,547],[11,548],[11,550],[10,550]];
+
+// enfore Qt kit
+GUI.qt;
 
 Window.closeAll;
 
@@ -175,6 +188,35 @@ w.drawFunc_{|me|
 		}
 	};
 
+	// MAIN PANEL CUTOUT for rotary knobs
+	Color(0.3, 0.3, 0.3, 0.1).setFill;
+	Color(0.3, 0.3, 0.3, 0.2).setStroke;
+    Pen.addOval(Rect(124, 174, 86, 86));  // TEMPO
+	Pen.addOval(Rect(287, 174, 86, 86));  // TRACK PATT
+	Pen.addOval(Rect(450, 174, 86, 86));  // MODE
+	Pen.addOval(Rect(920, 174, 86, 86));  // VOLUME
+	Pen.fillStroke;
+
+	// TOP PANEL CUTOUT for rotary knobs
+	Color(0.3, 0.3, 0.3, 0.1).setFill;
+	Color(0.3, 0.3, 0.3, 0.2).setStroke;
+
+	/*
+	0) TUNING
+	1) CUTTOF FQ
+	2) RESONANCE
+	3) ENV MODE
+	4) DECAY
+	5) ACCENT
+	*/
+	6.do { |idx|
+		var startx = 302;
+		var offsetx = 82;
+		var nsize = 55;
+		var ypos = 55;
+		Pen.addOval(Rect(startx + (idx*offsetx), ypos, nsize, nsize));
+		Pen.fillStroke;
+	};
 
 	// LEDS ///////
 	// - notes, in order
@@ -335,24 +377,36 @@ w.drawFunc_{|me|
 
 };
 
+~knob_colors_style = [Color.white, Color(0,0,0,0), Color(0,0,0,0), Color.gray];
+
+
 // top row
-x_offset = 82;
-k = Knob.new(w, Rect(start_x, 58, size, size));
-k = Knob.new(w, Rect(start_x + (x_offset*1), 58, size, size));
-k = Knob.new(w, Rect(start_x + (x_offset*2), 58, size, size));
-k = Knob.new(w, Rect(start_x + (x_offset*3), 58, size, size));
-k = Knob.new(w, Rect(start_x + (x_offset*4), 58, size, size));
-k = Knob.new(w, Rect(start_x + (x_offset*5), 58, size, size));
+x_offset = 81.76;
+6.do{ |idx|
+	var ssize = 67;
+	var sstart_x = 296.8;
+
+	k = Knob.new(w, Rect(sstart_x + (x_offset*idx), 49, ssize, ssize));
+    k.color = ~knob_colors_style;
+};
 
 // mid row
-~knob_TEMPO = Knob.new(w, Rect(126, 177, 80, 80));  // l 1
-k = Knob.new(w, Rect(290, 177, 80, 80));  // l 2
-k = Knob.new(w, Rect(453, 177, 80, 80));  // l 3
-k = Knob.new(w, Rect(923, 177, 80, 80));  // l 3
 
-~knob_TEMPO.action_({ |obj|
-	obj.value.postln;
-});
+~knob_TEMPO = Knob.new(w, Rect(114, 164, 106, 106));
+~knob_TEMPO.color = ~knob_colors_style;
+~knob_TEMPO.action_({ |obj| obj.value.postln; });
+
+~knob_TRACKPATT = Knob.new(w, Rect(277, 164, 106, 106));
+~knob_TRACKPATT.color = ~knob_colors_style;
+~knob_TRACKPATT.action_({ |obj| obj.value.postln; });
+
+~knob_MODE = Knob.new(w, Rect(440, 164, 106, 106));
+~knob_MODE.color = ~knob_colors_style;
+~knob_MODE.action_({ |obj| obj.value.postln; });
+
+~knob_VOLUME = Knob.new(w, Rect(910, 164, 106, 106));
+~knob_VOLUME.color = ~knob_colors_style;
+~knob_VOLUME.action_({ |obj| obj.value.postln; });
 
 // notes, black
 b = Button(w, Rect(294, 341, 25, 46));
