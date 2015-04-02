@@ -210,8 +210,8 @@ w.drawFunc_{|me|
 	5) ACCENT
 	*/
 	6.do { |idx|
-		var startx = 302;
-		var offsetx = 82;
+		var startx = 303;
+		var offsetx = 81.77;
 		var nsize = 55;
 		var ypos = 55;
 		Pen.addOval(Rect(startx + (idx*offsetx), ypos, nsize, nsize));
@@ -813,7 +813,7 @@ t.stringColor_(redCol);
 
 // PATT. SECTION red
 t = StaticText.new(
-	w, Rect(867, 469, 82, 27)).string_("PATT. SECTION").align_(\center);
+	w, Rect(858, 469, 98, 27)).string_("PATT. SECTION").align_(\center);
 t.font = Font("Monaco", 11);
 t.stringColor_(redCol);
 
